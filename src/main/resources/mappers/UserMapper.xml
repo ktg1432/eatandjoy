@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.team.Project.mapper.UserMapper">
+	
+	<select id="getUserByUsername" 
+			resultType="com.team.Project.domain.UsersVO"
+			parameterType="String">
+		SELECT * FROM tbl_users 
+		WHERE username = #{username}
+	</select>
+	
+	<select id="hasUsername" 
+			resultType="int"
+			parameterType="String">
+		SELECT count(*) FROM tbl_user
+		WHERE username = #{username}
+	</select>
+	
+	<select id="getUserRolesByUsername" 
+			resultType="com.team.Project.domain.UsersVO"
+			parameterType="String">
+		SELECT * FROM tbl_user_roles 
+		WHERE username = #{username}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.team.Project.domain.UsersVO">
+		INSERT INTO tbl_users VALUES 
+		(#{tbl_users.username}, #{tbl_users.password}, #{tbl_users.enabled})			
+	</insert>
+	
+	 <insert id="insertUserRoles">
+		 
+		INSERT INTO tbl_user_roles VALUES 
+		(NEXTVAL(tbl_user_roles_seq), #{username}, #{role})
+		  
+	</insert>
+	
+	<update id="updateUser" parameterType="com.team.Project.domain.MemberVO">
+		UPDATE tbl_users
+		SET tbl_users.username = #{username}, tbl_users.password = #{password}, tbl_users.enabled = #{enabled}
+		WHERE tbl_member.uId = #{uId}
+	</update>
+</mapper>

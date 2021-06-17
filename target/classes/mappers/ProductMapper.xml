@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.ProductMapper">
+
+	<select id="getList" resultType="com.team.Project.domain.ProductVO">
+		<![CDATA[
+		select * from tbl_product where pId > 0
+		]]>
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.team.Project.domain.ProductVO">
+	<![CDATA[
+		SELECT pId, pName, pPrice, pRegDate, pUpdateDate 
+		FROM tbl_product
+		USE INDEX (PRIMARY) 
+		WHERE
+		]]>
+		<include refid="criteria"></include>
+		
+		<![CDATA[
+		pId > 0
+		order by pId desc
+		LIMIT #{skipCount}, #{amount}
+		]]>
+	</select>
+	
+	<select id="getListWithPagingProducts" resultType="com.team.Project.domain.ProductVO">
+	
+		SELECT *
+		FROM tbl_product a
+		LEFT JOIN tbl_pattach b
+		USING (pId)
+		WHERE
+		<include refid="criteria"></include>
+		fileName LIKE '%_cover%' AND pCateCode LIKE '%1'
+		ORDER BY pId DESC
+		LIMIT #{skipCount}, #{amount}
+		
+	</select>
+	
+	<select id="getListWithPagingProductsDesc" resultType="com.team.Project.domain.ProductVO">
+	
+		SELECT *
+		FROM tbl_product a
+		LEFT JOIN tbl_pattach b
+		USING (pId)
+		WHERE
+		<include refid="criteria"></include>
+		fileName LIKE '%_cover%' AND pCateCode LIKE '%1'
+		ORDER BY pPrice DESC
+		LIMIT #{skipCount}, #{amount}
+		
+	</select>
+	
+	<select id="getListWithPagingProductsAsc" resultType="com.team.Project.domain.ProductVO">
+	
+		SELECT *
+		FROM tbl_product a
+		LEFT JOIN tbl_pattach b
+		USING (pId)
+		WHERE
+		<include refid="criteria"></include>
+		fileName LIKE '%_cover%' AND pCateCode LIKE '%1'
+		ORDER BY pPrice ASC
+		LIMIT #{skipCount}, #{amount}
+		
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_product
+		where 
+		<include refid="criteria"></include>
+		<![CDATA[
+		pId > 0
+		]]>
+	</select>
+	
+	<select id="getTotalCountProducts" resultType="int">
+		select count(*) from tbl_product
+		where 
+		<include refid="criteria"></include>
+		<![CDATA[
+		pId > 0
+		]]>
+	</select>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							pName like CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="type == 'C'.toString()">
+							pDesc like CONCAT('%', #{keyword}, '%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	
+	
+	<!-- <insert id="insert">
+		insert into tbl_notice (nTitle, nContent, nWriter)
+		values (#{nTitle}, #{nContent}, #{nWriter})
+	</insert> -->
+	
+	<!-- Register -->
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="pId" order="BEFORE" resultType="int">
+			SELECT MAX(pId)+1 FROM tbl_product
+		</selectKey>
+		insert into tbl_product (pId, pName, pDesc, pPrice, pCateCode)
+		values (#{pId}, #{pName}, #{pDesc}, #{pPrice}, #{pCateCode})
+	</insert>
+	
+	<!-- 카테고리 호출  -->
+	<select id="category" resultType="com.team.Project.domain.ProductCategoryVO">
+		WITH recursive cte AS
+		( 
+			SELECT pCateCode, pCateName, parentCode, 1 AS level 
+			FROM tbl_pcategory WHERE parentCode IS null
+			
+			UNION ALL
+			
+			SELECT B.pCateCode, B.pCateName, B.parentCode, C.level +1 AS level
+			FROM tbl_pcategory B
+			
+			INNER JOIN cte AS C ON B.parentCode = C.pCateCode
+		)
+		SELECT * FROM cte;
+	</select> 
+	
+	
+	<select id="read" resultType="com.team.Project.domain.ProductVO">
+		select * from tbl_product where pId = #{pId}
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_product where pId = #{pId}
+	</delete>
+	
+	<update id="update">
+		update tbl_product 
+		set pName = #{pName},
+		pDesc = #{pDesc},
+		pPrice = #{pPrice},
+		pUpdateDate = now()
+		where pId = #{pId}
+	</update>
+	
+	<update id="updateHit">
+		UPDATE tbl_product
+      	SET hit = hit + 1
+      	WHERE pId= #{pId}
+	</update>
+	
+	
+	
+</mapper>

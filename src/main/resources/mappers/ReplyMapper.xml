@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.ReplyMapper">
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="rId" order="BEFORE" resultType="int">
+			select MAX(rId)+1 from tbl_preply
+		</selectKey>
+		insert into tbl_preply (rId, pId, rWriter, rTitle, rContent)
+		values (#{rId}, #{pId}, #{rWriter}, #{rTitle}, #{rContent})
+	</insert>
+	
+	<select id="read" resultType="com.team.Project.domain.ReplyVO">
+		select * from tbl_preply where rId = #{rId}
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_preply where rId = #{rId}
+	</delete>
+	
+	<update id="update">
+		update tbl_preply 
+		set rTitle = #{rTitle},
+		rContent = #{rContent},
+		rUpdateDate = now() 
+		where rId = #{rId}
+	</update>
+	
+	<select id="getListWithPaging" resultType="com.team.Project.domain.ReplyVO">
+		<![CDATA[
+		SELECT rId, pId, rTitle, rWriter, rContent, rRegDate, rUpdateDate, rHit 
+		FROM tbl_preply 
+		USE INDEX (idx_reply) 
+		WHERE
+		pId = #{pId}
+		and rId > 0
+		
+		LIMIT #{cri.skipCount}, #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByPid" resultType="int">
+		<![CDATA[
+		select count(rId) from tbl_preply
+		WHERE
+		pId = #{pId}
+		]]>
+	</select>
+	
+</mapper>

@@ -1,0 +1,174 @@
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+a{
+	display : block;
+}
+
+div.items-box{
+	
+}
+
+div.table-warp{
+	text-align: center;
+	padding : 30px;
+	font-size: 14px;
+}
+
+div.table-inner{
+	display: inline-block;
+	width : 800px;
+	border-top: solid orange;
+}
+
+th{
+	height : 65px;
+	text-align : center;
+	vertical-align : middle;
+}
+
+.float-right{
+	
+	float : right;
+	
+}
+
+.sort-list{
+	font-size: 14px;
+	text-align : center;
+	vertical-align : middle;
+	
+}
+
+.coverImg{
+	display: flex;
+    align-content: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.small-Img{
+	width : 200px;
+	height : 180px;
+}
+
+.paging-outer{
+	text-align: center;
+}
+
+.paging{
+	display: inline-block;
+	width : 1000px;
+	padding-bottom: 30px;
+}
+
+ul li.paginate_button{
+	display: inline-block;
+	width: 30px;
+    height: 30px;
+	border: 1px solid #ddd;
+	text-align: center;
+	vertical-align: middle;
+	
+}
+
+span.name{
+	font-size: 20px;
+	color: #333;
+    text-decoration:none
+    font-weight: 400;
+    line-height: 29px;
+    font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
+span.price{
+	font-size: 15px;
+    color: #333;
+    line-height: 29px;
+    font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
+.btn-default{
+
+  background-color: #ea7213ba;
+
+  border: none;
+
+  color: white;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 12px;
+  
+  cursor: pointer;
+  
+  border-radius: 5px;
+
+}
+
+/* -- quantity box -- */
+
+.quantity {
+ display: inline-block; }
+
+.quantity .input-text.qty {
+ width: 35px;
+ height: 39px;
+ padding: 0 5px;
+ text-align: center;
+ background-color: transparent;
+ border: 1px solid #efefef;
+}
+
+.quantity.buttons_added {
+ text-align: left;
+ position: relative;
+ white-space: nowrap;
+ vertical-align: top; 
+ padding-right: 30px;
+ 
+ }
+
+.quantity.buttons_added input {
+ display: inline-block;
+ margin: 0;
+ vertical-align: top;
+	
+
+}
+
+.quantity.buttons_added .minus,
+.quantity.buttons_added .plus {
+ padding: 7px 10px 8px;
+ height: 41px;
+ background-color: #ffffff;
+ border: 1px solid #efefef;
+ cursor:pointer;}
+
+.quantity.buttons_added .minus {
+ border-right: 0; }
+
+.quantity.buttons_added .plus {
+ border-left: 0; }
+
+.quantity.buttons_added .minus:hover,
+.quantity.buttons_added .plus:hover {
+ background: #eeeeee; }
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ margin: 0; }
+ 
+ .quantity.buttons_added .minus:focus,
+.quantity.buttons_added .plus:focus {
+ outline: none; }

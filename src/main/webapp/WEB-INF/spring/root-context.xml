@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- DB -->
+
+	<!-- HikariCP configuration -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		 <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property> 
+			<property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/db"></property>
+<!-- 
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:mariadb://localhost:3306/db"/> -->
+
+		<property name="username" value="eatnjoy"/>
+		<property name="password" value="1234"/>
+	</bean>
+
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean>
+
+	<!-- SqlSessionFactory -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+
+		<property name="mapperLocations"
+			value="classpath:/mappers/*.xml"></property>
+
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- Mybatis Mapper Interface Path -->
+	<mybatis-spring:scan base-package="com.team.Project.mapper" />
+		
+	<context:component-scan base-package="com.team.Project.service" />
+	
+	<context:component-scan base-package="com.team.Project.domain" />
+		
+	<context:component-scan base-package="com.team.Project.task" />
+
+		
+	<task:annotation-driven/>
+
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.ProductAttachMapper">
+
+	<insert id="insert">
+		insert into tbl_pattach(uuid, uploadPath, fileName, fileType, pId)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{pId})
+	</insert>
+		
+	<delete id="delete">
+		delete from tbl_pattach where uuid = #{uuid}
+	</delete>	
+	
+	<select id="findByPId" resultType="com.team.Project.domain.ProductAttachVO">
+		select * from tbl_pattach where pId = #{pId}
+	</select>
+	
+	<select id="findImgCover" resultType="com.team.Project.domain.ProductAttachVO">
+		select * from tbl_pattach WHERE (pId = #{pId} AND fileName LIKE '%_cover%')
+	</select>
+	
+	<delete id="deleteAll">
+		delete from tbl_pattach where pId = #{pId}
+	</delete>
+	
+	<select id="getOldFiles" resultType="com.team.Project.domain.ProductAttachVO">
+		select * from tbl_pattach where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')
+	</select>
+	
+</mapper>
+

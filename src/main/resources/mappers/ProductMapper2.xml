@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.ProductMapper2">
+
+	<!-- 01. 상품 전체 목록 -->
+	<select id="listProduct"
+		resultType="com.team.Project.domain.ProductVO2">
+		SELECT
+		product_id AS productId,
+		product_name AS productName,
+		product_price AS productPrice,
+		product_desc AS productDesc,
+		product_url AS productUrl
+		FROM tbl_product2
+		ORDER BY product_name
+	</select>
+	<!-- 02. 상품 상세보기 -->
+	<select id="detailProduct"
+		resultType="com.team.Project.domain.ProductVO2">
+		SELECT
+		product_id AS productId,
+		product_name AS productName,
+		product_price AS productPrice,
+		product_desc AS productDesc,
+		product_url AS productUrl
+		FROM tbl_product2
+		WHERE product_id = #{productId}
+	</select>
+
+	
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.CartMapper">
+
+	 <!-- 1. 장바구니 추가 -->
+    <insert id="insertCart" >
+        INSERT INTO tbl_cart(
+            cart_id, uId, product_id, amount
+        ) VALUES (
+            NEXTVAL(tbl_cart_seq), #{uId}, #{productId}, #{amount}
+        )
+    </insert>
+    <!-- 2. 장바구니 목록 -->
+    <select id="listCart" resultType="com.team.Project.domain.CartDTO">
+        SELECT
+            c.cart_id AS cartId, 
+            c.uId AS uId,
+            p.product_id As productId,
+            m.uName AS uName, 
+            p.product_name AS productName, 
+            c.amount, 
+            p.product_price AS productPrice, 
+            (product_price * amount) money
+        FROM
+            tbl_member m, tbl_product2 p, tbl_cart c
+        WHERE m.uId = c.uId
+            AND p.product_id = c.product_id
+            AND c.uId = #{uId}
+        ORDER BY
+            c.cart_id
+    </select>
+    <!-- 3. 장바구니 전체 금액 -->
+    <select id="sumMoney" resultType="int">
+        SELECT NVL(SUM(product_price * amount), 0) money
+        FROM tbl_cart c, tbl_product2 p
+        WHERE c.product_id = p.product_id AND c.uId = #{uId}
+    </select>
+    <!-- 4. 장바구니 수정 -->
+    <update id="modifyCart">
+        UPDATE tbl_cart    
+        SET amount = #{amount} 
+        WHERE uId= #{uId} 
+        AND product_id = #{productId}
+    </update>
+    <!-- 5. 장바구니 삭제 -->
+    <delete id="deleteCart">
+        DELETE FROM tbl_cart 
+        WHERE cart_id = #{cartId}
+    </delete>
+    <!-- 6. 장바구니에 동일한 상품 레코드 확인 -->
+    <select id="countCart" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_cart
+        WHERE uId= #{uId}  
+        AND product_id = #{productId}
+    </select>
+    <!-- 7. 장바구니에 동일한 상품이 존재하면 수정 -->
+    <update id="updateCart">
+        UPDATE tbl_cart 
+        SET amount = amount + #{amount} 
+        WHERE uId= #{uId} 
+        AND product_id = #{productId}
+    </update>
+</mapper>

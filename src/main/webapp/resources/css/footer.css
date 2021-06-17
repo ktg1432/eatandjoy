@@ -1,0 +1,124 @@
+<
+style
+>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap')
+	;
+
+</
+style>* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+.footer_wrap {
+	position: relative;
+	border-top: 1px solid #000;
+	background: #white;
+}
+.footer {
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	height: 300px;
+	display: block;
+	overflow:hidden; 
+	padding:0 0 0 0;
+	
+	/* padding-top:10px; */
+}
+
+.inner_footer {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	width: 80%;
+	height: 40vh;
+	border-bottom:1px solid #ebebeb;
+}
+
+/* img{
+    width: 70%;
+    height: auto;
+} */
+.footer_third {
+	display: flex;
+	flex-direction: column;
+}
+
+.logo_container {
+	align-items: center;
+	width: 30%;
+	margin-right: 0px;
+	margin-right: 30px;
+}
+
+.footer-1 {
+	width: 15%;
+	margin-right: 50px;
+	line-height: 30px;
+}
+
+.footer-2 {
+	width: 25%;
+	margin-right: 50px;
+}
+
+.footer_third a {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 18px;
+	color:;
+	color: #4c4c4c;
+	text-decoration: none;
+	margin-bottom: 0.5rem;
+}
+
+.footer_third a:hover {
+	color: red;
+	transition: 0.3s ease-out;
+}
+
+.footer_third h1 {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 22px;
+	color: #4c4c4c;
+	display: block;
+	width: 100%;
+	margin: 0;
+}
+
+.footer_third li {
+	list-style: none;
+	display: inline-block;
+	padding: 0 5px;
+	font-size: 20px;
+}
+
+.footer_third ul {
+	padding: 0;
+	margin: 0 0 20px 0;
+}
+
+.footer_third span {
+	color: #4c4c4c;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 12px;
+	font-weight: 200;
+	display: block;
+	width: 100%;
+	padding-top: 20px;
+}
+
+@media ( max-width : 600px) {
+	.footer .inner_footer {
+		width: 90%;
+	}
+	.inner_footer .logo_container, .inner_footer .footer_third {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+}

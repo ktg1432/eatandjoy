@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#snb {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 0;
+	z-index: 100;
+}
+
+#snb .right_snb_btn_open {
+	position: absolute;
+	top: 45%;
+	left: -32px;	
+}
+/* #snb .right_snb_btn ul{}
+#snb .right_snb_btn ul li{width:30px;height:40px;text-align:center;background:#fff;border: 1px solid #ccc;border-right: 1px solid #fff;}
+#snb .right_snb_btn ul li a{line-height:40px;font-size:14px;letter-spacing:-.5px;color:#000;position:relative;display:block;height:100%;}
+#snb .right_snb_btn ul li a:hover{color:#000;}
+#snb .right_snb_btn ul li a i{line-height:40px;} */
+
+#snb .right_snb_btn_open a{corsor:pointer;}

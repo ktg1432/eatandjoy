@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+#container{margin-top:-1px;}
+#contents .sub_content{width:100%; margin:0; padding:0;}/* 메인 */
+.main_visual{overflow:hidden; width:100%;  margin: 0;}
+.main_content{}
+.main_slide_ban{overflow:hidden; width:1200px; margin:0 auto;margin-top:30px;}
+.main_ban_img01,
+.main_ban_img02,
+.main_ban_img03{display:inline-block; float:left;margin-right:15px;}
+.main_ban_img03{margin-right:0px;}
+
+.main_fullbanner{display:block;margin-top:60px;text-align:center;}
+.main_fullbanner img{max-width:100%;}
+
+.main_cont_slide{text-align:center;}
+.main_bottom_banner{display: inline-block;width: 100%;margin-top:60px;}
+.main_bottom_banner div {display: inline-block;float: left;width: 50%;box-sizing: border-box;text-align: center;}
+.main_bottom_banner div:first-child{text-align:left;}
+.main_bottom_banner div:last-child{text-align:right;}
+.main_bottom_banner div img {max-width: 100%;}
+
+.scroll_wrap{top:905px;}
+
+.left_gnb{display:block!important;}

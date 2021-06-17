@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.MemberMapper">
+
+ 
+  	<select id="isMember" parameterType="String" resultType="int">
+ 		SELECT COUNT(*)	FROM tbl_member
+ 		WHERE uId=#{uId}
+ 	</select>
+ 
+ 	<select id="isEnableEmail" parameterType="String" resultType="int">
+ 		SELECT Count(*) FROM tbl_member
+ 		WHERE uEmail=#{uEmail}
+ 	</select>
+ 	
+ 	<select id="isEnablePhone" parameterType="String" resultType="int">
+ 		SELECT Count(*)	FROM tbl_member
+ 		WHERE uPhon=#{uPhon}
+ 	</select>
+ 
+ 	<insert id="insertMember" parameterType="com.team.Project.domain.MemberVO">
+
+	 	INSERT INTO tbl_member ( uId, uPwd, uName, uEmail, uPhon, uZip, uAddr, uAddrs, uBirth, uGender, rEmail, rSMS) 
+ 		VALUES	(#{uId},#{uPwd},#{uName},#{uEmail},#{uPhon}, #{uZip},#{uAddr},#{uAddrs},#{uBirth},#{uGender},#{rEmail},#{rSMS})
+
+ 	</insert>
+ 	
+ 	<select id="getMember" parameterType="String" resultType="com.team.Project.domain.MemberVO">
+ 		SELECT * FROM tbl_member
+ 		WHERE uId = #{uId}
+ 	</select>
+ 	
+ 	<update id="updateMember" parameterType="com.team.Project.domain.MemberVO">
+ 		UPDATE tbl_member 
+ 		SET tbl_member.uName = #{uName}, 
+ 			tbl_member.uEmail = #{uEmail}, 
+ 			tbl_member.uZip = #{uZip}, 
+ 			tbl_member.uAddr = #{uAddr}, 
+ 			
+ 			tbl_member.uAddrs = #{uAddrs}, 
+ 			tbl_member.uPhon = #{uPhon}
+ 		WHERE tbl_member.uId = #{uId}
+ 	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatepwd" parameterType="com.team.Project.domain.MemberVO">
+		UPDATE tbl_member 
+		SET tbl_member.uPwd = #{uPwd} 
+		WHERE tbl_member.uId = #{uId}
+	</update>
+	
+	<update id="setpwd" parameterType="com.team.Project.domain.MemberVO">
+		UPDATE tbl_member
+		SET tbl_member.uPwd = #{uPwd}
+		WHERE tbl_member.uId = #{uId}
+	</update>
+	
+	<update id="modifypwd" parameterType="com.team.Project.domain.MemberVO">
+		UPDATE tbl_member
+		SET tbl_member.uPwd = #{uPwd}
+		WHERE tbl_member.uId = #{uId}
+			
+	</update>
+</mapper>
+

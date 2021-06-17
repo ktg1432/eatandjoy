@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.Project.mapper.BoardMapper">
+
+	<select id="getList" resultType="com.team.Project.domain.BoardVO">
+		<![CDATA[
+		select * from tbl_notice where nId > 0
+		]]>
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.team.Project.domain.BoardVO">
+	<![CDATA[
+		SELECT nId, nTitle, nWriter, nRegDate, nUpdateDate 
+		FROM tbl_notice 
+		USE INDEX (PRIMARY) 
+		WHERE
+		]]>
+		<include refid="criteria"></include>
+		
+		<![CDATA[
+		nId > 0
+		order by nId desc
+		LIMIT #{skipCount}, #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_notice 
+		where 
+		<include refid="criteria"></include>
+		<![CDATA[
+		nId > 0
+		]]>
+	</select>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							nTitle like CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="type == 'C'.toString()">
+							nContent like CONCAT('%', #{keyword}, '%')
+						</when>
+						<when test="type == 'W'.toString()">
+							nWriter like CONCAT('%', #{keyword}, '%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	
+	
+	<!-- <insert id="insert">
+		insert into tbl_notice (nTitle, nContent, nWriter)
+		values (#{nTitle}, #{nContent}, #{nWriter})
+	</insert> -->
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="nId" order="BEFORE" resultType="int">
+			SELECT MAX(nId)+1 FROM tbl_notice
+		</selectKey>
+		insert into tbl_notice (nId, nTitle, nContent, nWriter)
+		values (#{nId}, #{nTitle}, #{nContent}, #{nWriter})
+	</insert>
+	
+	<select id="read" resultType="com.team.Project.domain.BoardVO">
+		select * from tbl_notice where nId = #{nId}
+	</select>
+	
+	<delete id="delete">
+		delete from tbl_notice where nId = #{nId}
+	</delete>
+	
+	<update id="update">
+		update tbl_notice 
+		set nTitle = #{nTitle},
+		nContent = #{nContent},
+		nWriter = #{nWriter},
+		nUpdateDate = now()
+		where nId = #{nId}
+	</update>
+	
+	
+	
+</mapper>

@@ -1,0 +1,63 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <http auto-config="true" use-expressions="true"> 
+    
+   		<headers>
+			<cache-control />
+		</headers>
+		
+		<intercept-url pattern="/member/**" access="permitAll"/>
+    	
+       <!--  <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
+        <intercept-url pattern="/board/list" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/welcome" access="isAuthenticated()"/>
+        <!-- <intercept-url pattern="/secured/**" access="isAuthenticated()"/>      -->   
+<!--         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
+        
+        <form-login login-page="/login" 
+       			    default-target-url="/"
+       			    username-parameter="username" 
+            		password-parameter="password" 
+           		    authentication-failure-url="/loginError" /> <!-- default-target-url="/" -->
+          
+      	<logout logout-success-url="/logoutProc" 
+			    delete-cookies="JSESSIONID" />  		
+			    
+	    <csrf disabled="true"/>	
+       		
+     	<!-- <access-denied-handler error-page="/access-denied" /> -->
+     	
+   	    <session-management>
+		    <concurrency-control max-sessions="1" 
+							     error-if-maximum-exceeded="true" />
+   	    </session-management>
+	    <!-- error-if-maximum-exceeded="true" : 중복 로그인 방지 
+	    	 max-sessions : 최대 세션 허용 개수-->
+     	
+    </http>
+    
+    <authentication-manager erase-credentials="true">
+          <authentication-provider ref="customProvider" />
+    </authentication-manager> 
+	
+   	<beans:bean id="customProvider" 
+				class="com.team.Project.service.CustomProvider">
+       	  <beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>  
+	
+    <beans:bean id="authJdbcService" 
+    	  		class="com.team.Project.service.AuthJdbcService">
+          <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>  
+
+	<beans:bean id="encoder" 
+				class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		  <beans:constructor-arg name="strength" value="10" />
+	</beans:bean>   
+	
+</beans:beans>
