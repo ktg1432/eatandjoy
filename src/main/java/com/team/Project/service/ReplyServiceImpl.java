@@ -72,4 +72,10 @@ public class ReplyServiceImpl implements ReplyService {
 				mapper.getListWithPaging(cri, pId));
 	}
 
+	@Override
+	public int updateHit(int rId) {
+		log.info("updateHit pId Num : " + rId);
+		return mapper.updateHit(rId);
+	}
+
 }

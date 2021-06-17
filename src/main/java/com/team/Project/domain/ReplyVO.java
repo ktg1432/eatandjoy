@@ -9,6 +9,7 @@ public class ReplyVO {
 	
 	private int rId;
 	private int pId;
+	private int rownum;
 	
 	private String rWriter;
 	private String rTitle;

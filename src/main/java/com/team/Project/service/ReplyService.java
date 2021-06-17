@@ -21,4 +21,6 @@ public int register(ReplyVO vo);
 	public ReplyPageDTO getListPage(Criteria cri, int pId);
 	
 	public int getTotal(Criteria cri);
+	
+	public int updateHit(int rId);
 }

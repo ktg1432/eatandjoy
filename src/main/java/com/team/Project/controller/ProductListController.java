@@ -37,18 +37,7 @@ private ProductService service;
 	log.info("list" + cri);
 	model.addAttribute("list", service.getListProducts(cri));
 	
-	int total = service.getTotalProducts(cri);
-	
-	log.info("total :" + total);
-	
-	model.addAttribute("pageMaker", new PageDTOProducts(cri, total));
-	
-	}
-	
-	@GetMapping("/price_desc")
-	public void productAllPriceDesc(CriteriaProducts cri, Model model) {
-	log.info("list" + cri);
-	model.addAttribute("list", service.getListProductsDesc(cri));
+	log.info("Criteria  : " + cri);
 	
 	int total = service.getTotalProducts(cri);
 	
@@ -58,12 +47,42 @@ private ProductService service;
 	
 	}
 	
-	@GetMapping("/price_asc")
-	public void productAllPriceAsc(CriteriaProducts cri, Model model) {
-	log.info("list" + cri);
-	model.addAttribute("list", service.getListProductsAsc(cri));
+	@GetMapping("/best")
+	public void productBest(@RequestParam(value = "cate", required=false, defaultValue = "%1") String pCateCode, 
+											CriteriaProducts cri, Model model) {
+	log.info("Criteria : " + cri);
 	
-	int total = service.getTotalProducts(cri);
+	int skipCount = cri.getSkipCount();
+	
+	int amount = cri.getAmount();
+	
+	log.info("pCateCode : " + pCateCode);
+	
+	model.addAttribute("list", service.getListProductsBest(pCateCode, skipCount, amount));
+	
+	int total = service.getTotalByCategory(pCateCode, cri);
+	
+	log.info("total :" + total);
+	
+	model.addAttribute("pageMaker", new PageDTOProducts(cri, total));
+	
+	}
+	
+	@GetMapping("/new")
+	public void productNew(@RequestParam(value = "cate", required=false, defaultValue = "%1") String pCateCode, 
+											CriteriaProducts cri, Model model) {
+		
+	log.info("Criteria  : " + cri);
+	
+	int skipCount = cri.getSkipCount();
+	
+	int amount = cri.getAmount();
+	
+	log.info("pCateCode : " + pCateCode);
+	
+	model.addAttribute("list", service.getListProductsNew(pCateCode, skipCount, amount));
+	
+	int total = service.getTotalByCategory(pCateCode, cri);
 	
 	log.info("total :" + total);
 	
@@ -78,7 +97,6 @@ private ProductService service;
 		service.updateHit(pId);
 		model.addAttribute("product", service.get(pId));
 		model.addAttribute("img", service.findImgCover(pId));
-		
 		
 	}
 	

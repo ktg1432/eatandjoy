@@ -19,6 +19,7 @@ public class ProductVO {
 	private String uploadPath;
 	private String fileName;
 	private boolean fileType;
+	private int hit;
 	
 	private List<ProductAttachVO> attachList;
 

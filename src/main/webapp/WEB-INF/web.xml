@@ -29,6 +29,13 @@
 		</init-param> -->
 		
 		<load-on-startup>1</load-on-startup>
+		
+		<multipart-config>
+			<location>C:\\upload\\temp</location>
+			<max-file-size>20971520</max-file-size><!-- 1MB * 20  -->
+			<max-request-size>41943040</max-request-size><!-- 40MB  -->
+			<file-size-threshold>20971520</file-size-threshold><!-- 20MB  -->
+		</multipart-config>
 	</servlet>
 	
 	<servlet-mapping>
@@ -49,7 +56,14 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/error/500.jsp</location>
 	</error-page>
-
+	
+	<!-- log4j2 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/log4j.xml</param-value>
+	</context-param>
+	
+	<!-- 한글 필터  -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter

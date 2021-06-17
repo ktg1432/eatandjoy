@@ -72,7 +72,7 @@ public class ReplyController {
 			@PathVariable("rId") int rId){
 		
 		log.info("get : " + rId);
-		
+		service.updateHit(rId);
 		return new ResponseEntity<>(service.get(rId), HttpStatus.OK);
 	}
 	

@@ -66,10 +66,5 @@ public class AuthJdbcService {
 											    role });
     	
     } //
-    public void updateUser(UsersVO users, String role) {
-    	
-    	String sql = "UPDATE tbl_users set (?,?,1)";
-    	this.jdbcTemplate.update(sql, new Object[] {users.getUsername(), users.getPassword()});
-    	
-    }
+
 } //

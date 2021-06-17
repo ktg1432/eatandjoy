@@ -7,6 +7,99 @@ a{
 	display : block;
 }
 
+div.mainLogoBox{
+	
+	position: relative;
+	margin-top: 20px;
+	margin-bottom : 30px;
+	height : 70px;
+}
+
+img.mainLogo{
+	
+	position: absolute;
+	left: 40%;
+	width : 300px;
+	
+}
+
+nav .navbar-nav li a{
+  color: black !important;
+ }
+
+li.mainSelect{
+	
+	padding-right:30px;
+	
+}
+
+div.productArray{
+	
+	text-align: center;
+	
+}
+
+div.productArray2{
+	
+	text-align: center;
+	margin : 70px 0 0 0;
+}
+
+
+a li:hover{
+	
+	color : #ea7213ba;
+	
+}
+
+div.showItems{
+	
+	margin : 10px 0;
+	color : #ea7213ba;
+}
+
+
+select.pickOrder {
+	
+width: 110px;
+padding: .1em .1em;
+margin: 2px 0 0 0;
+border: 1px solid #999;
+font-family: inherit;
+background: url('/resources/img/arrow.jpg') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
+select.pickCate{
+
+width: 120px;
+padding: .1em .1em;
+margin: 2px 0 0 0;
+border: 1px solid #999;
+font-family: inherit;
+background: url('/resources/img/arrow.jpg') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+	
+}
+
+input.searchKeyword{
+	
+	width: 200px;
+}
+
+
+
+select::-ms-expand {
+    display: none;
+}
+
+
 div.items-box{
 	
 }

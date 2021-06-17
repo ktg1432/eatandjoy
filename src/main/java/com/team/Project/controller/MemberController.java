@@ -101,7 +101,7 @@ public class MemberController {
       log.info("updateMember Controller : " + member);
       service.updateMember(member);
       rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-      return "/";
+      return "redirect:/";
    }
    
    /* 비밀번호 찾기 */

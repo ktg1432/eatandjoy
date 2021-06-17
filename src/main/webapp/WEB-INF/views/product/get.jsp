@@ -146,7 +146,7 @@
 						
 						$.getJSON("/product/getAttachList", {pId:pId}, function(arr){
 							
-							console.log(arr);
+							console.log("arr : " + arr);
 							
 							var str ="";
 							
@@ -162,11 +162,14 @@
 									str + "</li>";
 									
 								}else{
+									var originalPath = attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName;
+									console.log("originalPath : " + originalPath);
+									
 									var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.
 											uuid + "_" + attach.fileName);
 									str += "<li data-path='"+attach.uploadPath+"'";
 									str += " data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
-									console.log(fileCallPath);
+									console.log("fileCallPath : " +fileCallPath);
 									str += "<img src='/display?fileName="+fileCallPath+"'>";
 									str += "</div>";
 									str + "</li>";
@@ -207,7 +210,7 @@
 						
 						function showImage(fileCallPath){
 							
-							alert(fileCallPath);
+							alert("원본 이미지를 불러옵니다.");
 							
 							$(".bigPictureWrapper").css("display", "flex").show();
 							

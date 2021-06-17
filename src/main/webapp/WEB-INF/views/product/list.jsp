@@ -37,7 +37,7 @@
                                 	<td><a class='move' href='<c:out value="${product.PId}"/>'>
                                 	<c:out value="${product.PName}" /></a></td>
                                 	
-                                	<td><c:out value="${product.PPrice}" /></td>
+                                	<td><span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${product.PPrice}" />원</span></td>
                                 	<td><fmt:formatDate value="${product.PRegDate}" pattern="yyyy년 MM월 dd일"/></td>
                                 	<td><fmt:formatDate value="${product.PUpdateDate}" pattern="yyyy년 MM월 dd일 " /></td>
                                 </tr>
@@ -132,8 +132,7 @@
                             	처리가 완료됐습니다.
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-primary">완료</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">완료</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

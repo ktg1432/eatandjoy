@@ -104,8 +104,6 @@
 	
 	<script>
 	
-	/* $('.selectpicker').selectpicker(); */
-	
 		// 카테고리 등록
 		// 컨트롤러에서 데이터 받기
 		var jsonData = JSON.parse('${category}');
@@ -152,11 +150,6 @@
 			 }
 			 
 			 var cate2Select = $("select.category2");
-
-			 /* for(var i = 0; i < cate2Arr.length; i++) {
-			   cate2Select.append("<option value='" + cate2Arr[i].PCateCode + "'>"
-			        + cate2Arr[i].PCateName + "</option>");
-			 }  */
 			 
 			 cate2Select.children().remove();
 			 

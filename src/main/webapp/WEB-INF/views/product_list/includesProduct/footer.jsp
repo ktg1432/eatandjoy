@@ -12,7 +12,7 @@
 			<div class="inner_footer">
 
 				<div class="footer_third logo_container">
-					<img src="/resources/images/logo7.png" alt="EatNJoy logo">
+					<img src="/resources/img/eatnjoyLogo2.png" alt="EatNJoy logo" style = "width : 250px;">
 				</div>
 
 				<div class="footer_third footer-1">

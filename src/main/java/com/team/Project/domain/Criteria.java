@@ -16,7 +16,6 @@ public class Criteria {
 	
 	private String type;
 	private String keyword;
-	private int skipCount;
 	
 	public Criteria() {
 		this(0,10);
@@ -27,13 +26,10 @@ public class Criteria {
 		this.amount = amount;
 	}
 	
-	//method for MyBatis SQL Mapper
 	public int getPageNum() {
-		if(this.pageNum==0) {
-			pageNum = 1;
-		} else {
-			this.pageNum = pageNum;
-		}
+		if(pageNum == 0) {
+			this.pageNum = 1;
+		} 
 		
 		return pageNum ;
 	}
@@ -41,12 +37,7 @@ public class Criteria {
 	public int getSkipCount() {
 		return (pageNum -1) * amount;
 	}
-	
-	
-	public int setSkipCount() {
-		return (pageNum -1) * amount;
-	}
-	
+		
 	public String[] getTypeArr() {
 		return type ==null? new String[] {}: type.split("");
 	}	
@@ -60,9 +51,5 @@ public class Criteria {
 				
 				return builder.toUriString();
 	}
-	
-	
-	
-
-	
+			
 }

@@ -16,10 +16,9 @@ public class CriteriaProducts {
 	
 	private String type;
 	private String keyword;
-	private int skipCount;
 	
 	public CriteriaProducts() {
-		this(0,12);
+		this(0, 12);
 	}
 	
 	public CriteriaProducts(int pageNum, int amount) {
@@ -27,21 +26,18 @@ public class CriteriaProducts {
 		this.amount = amount;
 	}
 	
-	//method for MyBatis SQL Mapper
 	public int getPageNum() {
-		if(this.pageNum==0) {
-			pageNum = 1;
-		} else {
-			this.pageNum = pageNum;
-		}
+		if(pageNum == 0) {
+			this.pageNum = 1;
+		} 
 		
 		return pageNum ;
 	}
 	
-	
 	public int getSkipCount() {
 		return (pageNum -1) * amount;
 	}
+	
 	
 	public String[] getTypeArr() {
 		return type ==null? new String[] {}: type.split("");
@@ -56,9 +52,5 @@ public class CriteriaProducts {
 				
 				return builder.toUriString();
 	}
-	
-	
-	
-
 	
 }

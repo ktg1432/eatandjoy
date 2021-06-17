@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<div>message:${message}</div>
+	<%-- <div>message:${message}</div> --%>
 	<%-- <div>
 		name :
 		<sec:authentication property="name" />
@@ -28,18 +28,18 @@
 		<sec:authentication property="principal.username" />
 		<br> principal : ${pageContext.request.userPrincipal}<br>
 	</div> --%>
-	<c:if test="${not empty pageContext.request.userPrincipal.name}">
+	<%-- <c:if test="${not empty pageContext.request.userPrincipal.name}">
 	${pageContext.request.userPrincipal}
 	</c:if>
-	<hr>
+	<hr> --%>
 	<div class="wrapper fadeInDown zero-raduis">
 		<div id="formContent">
 			<!-- Tabs Titles -->
 
 			<!-- Icon -->
 			<div class="fadeIn first">
-				<a href="/"><img src="${path}/resources/images/logo7.png" id=""
-					alt="logo" /></a>
+				<a href="/"><img src="/resources/img/eatnjoyLogo2.png" id=""
+					alt="logo" style = "width : 200px" /></a>
 			</div>
 
 			<c:if test="${not empty pageContext.request.userPrincipal.name}">

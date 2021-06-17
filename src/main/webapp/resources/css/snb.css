@@ -7,7 +7,7 @@
 	padding: 0px;
 	height: 100%;
 	width: 0;
-	z-index: 100;
+	z-index: 999;
 }
 
 #snb .right_snb_btn_open {

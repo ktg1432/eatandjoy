@@ -6,11 +6,11 @@ import lombok.Data;
 public class ProductCategoryVO {
 
 	
-	private int pCateCode;
+	private String pCateCode;
 	
 	private String pCateName;
 	
-	private int parentCode;
+	private String parentCode;
 	
 	private int level;
 }

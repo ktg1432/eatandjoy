@@ -2,40 +2,10 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        
-        <title>Eat And Joy</title> 
-    	
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/resources/productView/css/styles.css" rel="stylesheet" />
-        
-        <!-- Page CSS -->
-        <link href="/resources/productAll/css/styles2.css" rel="stylesheet" />
-        
-        <!-- Footer CSS -->
-        <link href="/resources/productAll/css/footer.css" rel="stylesheet" />
-        
-        <!-- Font Awesome 5  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
-        <style>
-		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
-		</style>
-        
-    </head>
+
+<jsp:include page="/WEB-INF/views/header.jsp" />
+
     <body>
-        
         <!-- Product section-->
         <section class="py-5">
             <div class="container px-4 my-3">
@@ -104,7 +74,6 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title" id="myModalLabel">후기 작성</h4>
                     </div>
                     <div class="modal-body">
@@ -238,7 +207,7 @@
 						
 						for( var i = 0, len = list.length || 0; i<len; i++){
 							str +="<tr data-rId='"+list[i].rid+"'>";
-							str +="<td>" +(replyCnt-i)+ "</td>";
+							str +="<td>" +(replyCnt-list[i].rownum+1)+ "</td>";
 							str +="<td>" +list[i].rtitle+ "</td>";
 							str +="<td>" +list[i].rwriter+ "</td>";
 							str +="<td>"+replyService.displayTime(list[i].rregDate)+"</td>";

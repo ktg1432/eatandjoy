@@ -1,7 +1,5 @@
 package com.team.Project.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,14 +11,17 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team.Project.controller.HomeController;
+import com.team.Project.domain.CriteriaMain;
 import com.team.Project.service.MemberService;
+import com.team.Project.service.ProductService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 // import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,20 +30,54 @@ import lombok.extern.log4j.Log4j2;
  */
 @Controller
 @Log4j2
+@AllArgsConstructor
 public class HomeController {
+	
+
    
    @Autowired
-   MemberService service;
+   MemberService service1;
    
+   @Autowired
+   ProductService service;
    //로고 클릭시 메인 페이지
    @RequestMapping("/")
-   public ModelAndView logo() {
+   public ModelAndView logo(CriteriaMain cri, Model model) {
       log.info("main");
       ModelAndView mv= new ModelAndView();
       mv.addObject("message","메인으로 이동합니다");
       mv.setViewName("main");
+      model.addAttribute("listBest", service.getListMainBest(cri));
+      model.addAttribute("listNew", service.getListMainNew(cri));
+  	
+  	log.info("Criteria  : " + cri);
+      
       return mv;
    }
+   
+   /*@RequestMapping("/main")
+   public String main(CriteriaMain cri, Model model) {
+	   log.info("main");
+	   model.addAttribute("listBest", service.getListMainBest(cri));
+	      model.addAttribute("listNew", service.getListMainNew(cri));
+	  	
+	  	log.info("Criteria  : " + cri);
+	      
+      //model.addAttribute("message","메인으로 이동합니다");
+      return "main";
+   }*/
+	
+	/*@GetMapping("/main")
+	public void productAll(CriteriaMain cri, Model model) {
+	
+	model.addAttribute("listBest", service.getListMainBest(cri));
+	
+	model.addAttribute("listNew", service.getListMainNew(cri));
+	
+	log.info("Criteria  : " + cri);
+	
+	
+	}*/
    
    @RequestMapping("/demo")
    public String demo() {
@@ -94,7 +129,7 @@ public class HomeController {
            new SecurityContextLogoutHandler().logout(request, response, auth);
        }
 
-       return "/main";
+       return "redirect:/";
     } //
     
     @RequestMapping(value="/loginError", method = RequestMethod.GET)
@@ -135,7 +170,7 @@ public class HomeController {
       @RequestMapping("/member/mypage/mypage_main")
    public String mypage(@RequestParam("id") String id,Model model ) throws Exception {
       log.info("move mypage");
-      model.addAttribute("memvo",service.getMember(id));
+      model.addAttribute("memvo",service1.getMember(id));
       log.info("##### model ###### : " + model);
       return "member/mypage/mypage_main";
    }
@@ -143,7 +178,7 @@ public class HomeController {
    @RequestMapping("/member/update")
    public String update(@RequestParam("id") String id,Model model) throws Exception {
       log.info("move update");
-      model.addAttribute("memvo", service.getMember(id));
+      model.addAttribute("memvo", service1.getMember(id));
       return "member/update";
    }
    

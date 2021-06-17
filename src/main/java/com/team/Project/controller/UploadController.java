@@ -33,7 +33,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadController {
 		// 날짜형 폴더 생성 메서드
 		private String getFolder() {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 			
 			Date date = new Date();
 			

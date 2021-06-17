@@ -1,12 +1,7 @@
-<
-style
->
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-</
-style>* {
+
+* {
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
@@ -20,9 +15,11 @@ style>* {
 	background: #white;
 }
 .footer {
-	width: 100%;
-	left: 0;
-	bottom: 0;
+	position: absolute;
+	width: 1200px;
+	top: 50%;
+	left: 50%;
+	margin: 0 0 0 -600px;
 	height: 300px;
 	display: block;
 	overflow:hidden; 
@@ -32,13 +29,12 @@ style>* {
 }
 
 .inner_footer {
+	padding-top: 50px;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 	margin: 0 auto;
-	width: 80%;
 	height: 40vh;
-	border-bottom:1px solid #ebebeb;
 }
 
 /* img{
@@ -110,15 +106,10 @@ style>* {
 	font-weight: 200;
 	display: block;
 	width: 100%;
-	padding-top: 20px;
+	padding-top: 5px;
 }
 
-@media ( max-width : 600px) {
-	.footer .inner_footer {
+.footer .inner_footer {
 		width: 90%;
-	}
-	.inner_footer .logo_container, .inner_footer .footer_third {
-		width: 100%;
-		margin-bottom: 30px;
-	}
 }
+	

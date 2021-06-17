@@ -10,6 +10,7 @@ import com.team.Project.domain.ProductVO;
 import com.team.Project.mapper.ProductAttachMapper;
 import com.team.Project.mapper.ProductMapper;
 import com.team.Project.domain.Criteria;
+import com.team.Project.domain.CriteriaMain;
 import com.team.Project.domain.CriteriaProducts;
 import com.team.Project.domain.ProductAttachVO;
 import com.team.Project.domain.ProductCategoryVO;
@@ -91,6 +92,12 @@ public class ProductServiceImpl implements ProductService {
 		log.info("get total count");
 		return mapper.getTotalCount(cri);
 	}
+	
+	@Override
+	public int getTotalByCategory(String pCateCode, CriteriaProducts cri) {
+		log.info("get total count");
+		return mapper.getTotalCountCategory(pCateCode, cri);
+	}
 
 	@Override
 	public List<ProductAttachVO> getAttachList(int pId) {
@@ -129,16 +136,16 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public List<ProductVO> getListProductsDesc(CriteriaProducts cri) {
-		log.info("getListPriceDesc.........with criteria/" + cri);
-		return mapper.getListWithPagingProductsDesc(cri);
+	public List<ProductVO> getListProductsBest(String pCateCode, int skipCount, int amount) {
+		log.info("getListBest.........with criteria/" + skipCount + amount);
+		return mapper.getListWithPagingProductsBest(pCateCode, skipCount, amount);
 	}
 
 
 	@Override
-	public List<ProductVO> getListProductsAsc(CriteriaProducts cri) {
-		log.info("getListPriceAsc.........with criteria/" + cri);
-		return mapper.getListWithPagingProductsAsc(cri);
+	public List<ProductVO> getListProductsNew(String pCateCode, int skipCount, int amount) {
+		log.info("getListNew.........with criteria/" + skipCount + amount);
+		return mapper.getListWithPagingProductsNew(pCateCode, skipCount, amount);
 	}
 
 
@@ -147,5 +154,22 @@ public class ProductServiceImpl implements ProductService {
 		log.info("updateHit pId Num : " + pId);
 		return mapper.updateHit(pId);
 	}
+
+
+	@Override
+	public List<ProductVO> getListMainBest(CriteriaMain cri) {
+		log.info("getListMainBest.........with criteria/" + cri);
+		return mapper.getListMainBest(cri);
+	}
+
+
+	@Override
+	public List<ProductVO> getListMainNew(CriteriaMain cri) {
+		log.info("getListMainNew.........with criteria/" + cri);
+		return mapper.getListMainNew(cri);
+	}
+
+
+	
 
 }

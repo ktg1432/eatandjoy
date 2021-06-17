@@ -22,4 +22,6 @@ public interface ReplyMapper {
 			@Param("pId") int pId);
 	
 	public int getCountByPid(int pId);
+	
+	public int updateHit(int rId);
 }

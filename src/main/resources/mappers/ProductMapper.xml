@@ -40,32 +40,54 @@
 		
 	</select>
 	
-	<select id="getListWithPagingProductsDesc" resultType="com.team.Project.domain.ProductVO">
+	<select id="getListMainBest" resultType="com.team.Project.domain.ProductVO">
 	
 		SELECT *
 		FROM tbl_product a
 		LEFT JOIN tbl_pattach b
 		USING (pId)
 		WHERE
-		<include refid="criteria"></include>
-		fileName LIKE '%_cover%' AND pCateCode LIKE '%1'
-		ORDER BY pPrice DESC
-		LIMIT #{skipCount}, #{amount}
+		fileName LIKE '%_cover%' 
+		ORDER BY hit DESC
+		LIMIT 3
 		
 	</select>
 	
-	<select id="getListWithPagingProductsAsc" resultType="com.team.Project.domain.ProductVO">
+	<select id="getListMainNew" resultType="com.team.Project.domain.ProductVO">
 	
 		SELECT *
 		FROM tbl_product a
 		LEFT JOIN tbl_pattach b
 		USING (pId)
 		WHERE
-		<include refid="criteria"></include>
-		fileName LIKE '%_cover%' AND pCateCode LIKE '%1'
-		ORDER BY pPrice ASC
-		LIMIT #{skipCount}, #{amount}
+		fileName LIKE '%_cover%' 
+		ORDER BY pId DESC
+		LIMIT 3
 		
+	</select>
+	
+	<select id="getListWithPagingProductsBest" resultType="com.team.Project.domain.ProductVO">
+	
+		SELECT *
+		FROM tbl_product a
+		LEFT JOIN tbl_pattach b
+		USING (pId)
+		WHERE
+		fileName LIKE '%_cover%' AND pCateCode LIKE #{pCateCode}
+		ORDER BY hit DESC
+		LIMIT #{skipCount}, #{amount}
+	</select>
+	
+	<select id="getListWithPagingProductsNew" resultType="com.team.Project.domain.ProductVO">
+	
+		SELECT *
+		FROM tbl_product a
+		LEFT JOIN tbl_pattach b
+		USING (pId)
+		WHERE
+		fileName LIKE '%_cover%' AND pCateCode LIKE #{pCateCode}
+		ORDER BY pId DESC
+		LIMIT #{skipCount}, #{amount}
 	</select>
 	
 	<select id="getTotalCount" resultType="int">
@@ -103,12 +125,13 @@
 		</trim>
 	</sql>
 	
-	
-	
-	<!-- <insert id="insert">
-		insert into tbl_notice (nTitle, nContent, nWriter)
-		values (#{nTitle}, #{nContent}, #{nWriter})
-	</insert> -->
+	<select id="getTotalCountCategory" resultType="int">
+		select count(*) from tbl_product
+		where 
+		<![CDATA[
+		pId > 0 AND pCateCode like #{pCateCode}
+		]]>
+	</select>
 	
 	<!-- Register -->
 	

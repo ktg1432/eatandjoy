@@ -4,62 +4,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 <jsp:include page="/WEB-INF/views/header.jsp" />
-
-		<body>
 		
         <!-- Product List starts-->
         <section class="py-2">
 
             <div class="container mt-5">
             	<div class = "showItems">
-       	 			<span>전체상품</span>
+       	 			<span>베스트</span>
        	 		</div>
             	<!-- SearchForm starts -->
 		       <div class="border-top" style="width : 1200px;">
 		  
-		       	 	<form id='searchForm' action="/product_list/all" method='get' >
+		       	 	<form id='searchForm' action="/product_list/best" method='get' >
 		       	 	
 		       	 	<div class="d-flex justify-content-between border-bottom mt-2 mb-4">
 		       	 	
-			       	 	<div>
+		       	 		<div class="orderCate">
+				       	 	<ul class="list-inline sort-list pt-1 mb-2" style = "margin : 0;">
+				       	 		<li class="list-inline-item" style = "padding : 0 20px 0 0"><a href = "/product_list/best?cate=101">한식</a></li>
+				       	 		<li class="list-inline-item" style = "padding : 0 20px 0 0"><a href = "/product_list/best?cate=201">양식</a></li>
+				       	 		<li class="list-inline-item" style = "padding : 0 20px 0 0"><a href = "/product_list/best?cate=301">아시안</a></li>
+				       	 		<li class="list-inline-item" style = "padding : 0 20px 0 0"><a href = "/product_list/best?cate=401">샐러드</a></li>
+				       	 	</ul>
+			       	 	</div>
+		       	 		
+		       	 		<div class = "mb-2">
 		       	 			<select class="pickOrder">
 		       	 				<option>인기순</option>
 		       	 				<option>최신순</option>
 		       	 				<option>높은가격순</option>
 		       	 				<option>낮은가격순</option>
 		       	 			</select>
-		       	 		</div>
-			       	 	
-			       	 	<div>
-			       	 		<select name='type' class="pickCate ml-1 mr-1 pt-1">
-			       	 			<option value=""
-			       	 			<c:out value="${pageMaker.cri.type == null? 'selected' :''}"/> >
-			       	 			===선택===</option>
-			       	 			
-			  	 				<option value="T"
-			  	 				<c:out value="${pageMaker.cri.type eq 'T'? 'selected':''}"/> >
-			  	 				상품명만</option>
-			  	 				
-			  	 				<option value="C"
-			  	 				<c:out value="${pageMaker.cri.type eq 'C'? 'selected':''}"/> >
-			  	 				내용만</option>
-			  	 				
-			  	 				
-			  	 				<option value="TC"
-			  	 				<c:out value="${pageMaker.cri.type eq 'TC'? 'selected':''}"/> >
-			  	 				상품명+내용</option>
-			       	 				
-			       	 		</select>
-			       	 		
-			       	 		<input type='text' name='keyword' class = "searchKeyword mb-2 pt-2 pb-2" 
-			       	 		value='<c:out value="${pageMaker.cri.keyword}" />' />
-			       	 		
-			       	 		<input type='hidden' name='pageNum' 
-			       	 		value='<c:out value="${pageMaker.cri.pageNum}" />' />
-			       	 		
-			       	 		<input type='hidden' name='amount' 
-			       	 		value='<c:out value="${pageMaker.cri.amount}" />' />
-			       	 		<button class='btn btn-default mb-2 pt-2 pb-2' >검색</button>
 		       	 		</div>
 		       	 		
 			       	  </div>		
@@ -170,7 +145,7 @@
            
        <!-- Pagination ends -->
        
-       <form id='actionForm' action="/product_list/all" method="get">
+       <form id='actionForm' action="/product_list/best" method="get">
            <input type='hidden' name='pageNum' value= '${pageMaker.cri.pageNum}'>
            <input type='hidden' name='amount' value= '${pageMaker.cri.amount}'>
            <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}" />' >
@@ -179,8 +154,6 @@
      	</form>
      	
      	</body>
-     	
-     	<%@include file="includesProduct/footer.jsp" %>
 	
 		<script type="text/javascript">
 				
@@ -230,4 +203,11 @@
 			});
 			
 		});
-		</script>
+			</script>
+	
+        
+        
+        <%@include file="includesProduct/footer.jsp" %>
+        
+    
+    
